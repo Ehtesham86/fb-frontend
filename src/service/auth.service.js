@@ -9,17 +9,21 @@ export const registerUser = async(userData)=>{
          console.log(error)
     }
 }
-
-//login user
-export const loginUser = async(userData)=>{
+// loginUser.js
+export const loginUser = async (userData) => {
     try {
-        const response= await axiosInstance.post('/auth/login',userData);
-            return response.data
+      const response = await axiosInstance.post(
+        '/auth/login',
+        userData,
+        { withCredentials: true }        // ← tell axios/browser to include cookies
+      );
+      return response.data;
     } catch (error) {
-         console.log(error)
+      console.error(error);
+      throw error;
     }
-}
-
+  };
+  
 
 //login user
 export const logout = async()=>{
