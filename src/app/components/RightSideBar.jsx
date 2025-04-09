@@ -54,14 +54,14 @@ const RightSideBar = () => {
     useEffect(() => {
       if (selectedUser) {
         axios
-          .get(`http://localhost:8080/api/chat/messages/${user._id}/${selectedUser._id}`)
+          .get(`process.env.NEXT_PUBLIC_BACKEND_URL/api/chat/messages/${user._id}/${selectedUser._id}`)
           .then(res => setMessages(res.data.data))
           .catch(err => console.error(err));
       }
     }, [selectedUser]);
     const sendMessage = () => {
       axios
-        .post('http://localhost:8080/api/chat/send', {
+        .post('process.env.NEXT_PUBLIC_BACKEND_URL/api/chat/send', {
           senderId: user._id,
           receiverId: selectedUser._id,
           text
