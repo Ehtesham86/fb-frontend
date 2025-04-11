@@ -73,7 +73,7 @@ const RightSideBar = () => {
     };
   
   return (
-    <div className="w-[500px] h-auto   border-r border-gray-300 p-4 flex flex-col justify-between"  >
+    <div className="w-[500px] h-auto   border-r border-gray-300 p-4 flex flex-col justify-between" style={{width:'auto'}} >
       <div>
         {/* LIGHT FORMS SECTION */}
         <div
