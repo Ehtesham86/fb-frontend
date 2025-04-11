@@ -52,7 +52,7 @@ const HomePage = () => {
       <main className="flex flex-1 pt-16">
         <LeftSideBar />
         <div className="flex-1 px-4 py-6 md:ml-80 lg:mr-80 lg:max-w-3xl xl:max-w-4xl mx-auto">
-        <div className="lg:ml-2 xl:ml-28">
+        <div className="lg:ml-2 xl:ml-28" style={{width:'79%'}}>
             {/* <StorySection /> */}
             <NewPostForm
             
