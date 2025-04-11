@@ -51,7 +51,7 @@ const HomePage = () => {
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <main className="flex flex-1 pt-16">
         <LeftSideBar />
-        <div className="flex-1 px-4 py-6 md:ml-80 lg:mr-80 lg:max-w-3xl xl:max-w-4xl mx-auto">
+        <div className="flex-1 px-4 py-6 md:ml-80 lg:mr-80 lg:max-w-3xl xl:max-w-4xl mx-auto" style={{marginLeft:'13rem'}}>
         <div className="lg:ml-2 xl:ml-28" style={{width:'79%',marginRight:'-3rem'}}>
             {/* <StorySection /> */}
             <NewPostForm

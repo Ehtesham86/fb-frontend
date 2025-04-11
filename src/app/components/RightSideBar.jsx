@@ -191,6 +191,7 @@ const RightSideBar = () => {
       <div className="flex">
         <input
           type="text"
+          style={{width:"0"}}
           value={text}
           onChange={(e) => setText(e.target.value)}
           className="flex-1 p-2 border border-gray-300 rounded"
