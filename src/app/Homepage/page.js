@@ -7,6 +7,7 @@ import NewPostForm from "../posts/NewPostForm";
 import PostCard from "../posts/PostCard";
 import { usePostStore } from "@/store/usePostStore";
 import toast from "react-hot-toast";
+import { Send } from 'lucide-react';
 
 const HomePage = () => {
   const [isPostFormOpen, setIsPostFormOpen] = useState(false);
@@ -52,7 +53,7 @@ const HomePage = () => {
       <main className="flex flex-1 pt-16">
         <LeftSideBar />
         <div className="flex-1 px-4 py-6 md:ml-80 lg:mr-80 lg:max-w-3xl xl:max-w-4xl mx-auto" style={{marginLeft:'13rem'}}>
-        <div className="lg:ml-2 xl:ml-28" style={{width:'79%',marginRight:'-3rem'}}>
+        <div className="lg:ml-2 xl:ml-28" style={{width:'68%',marginRight:'-3rem'}}>
             {/* <StorySection /> */}
             <NewPostForm
             
@@ -79,7 +80,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="hidden lg:block lg:w-64 xl:w-80 fixed right-0 top-16 bottom-0 overflow-y-auto p-4"  >
+        <div className="hidden lg:block lg:w-64 xl:w-80 fixed right-0 top-16 bottom-0 overflow-y-auto p-4" style={{width:"31%"}}  >
           <RightSideBar />
         </div>
       </main>

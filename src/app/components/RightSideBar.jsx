@@ -8,6 +8,7 @@ import axios from 'axios';
 import userStore from "@/store/userStore";
 import { getAllUsers } from "@/service/user.service";
 import Image from 'next/image';
+import { Send } from 'lucide-react';
 
 const users = [
   { _id: "6686f5dc61546b507649caf2", username: "Ali" },
@@ -191,7 +192,7 @@ const RightSideBar = () => {
       <div className="flex">
         <input
           type="text"
-          style={{width:"0"}}
+          style={{width:"10rem"}}
           value={text}
           onChange={(e) => setText(e.target.value)}
           className="flex-1 p-2 border border-gray-300 rounded"
@@ -199,9 +200,9 @@ const RightSideBar = () => {
         />
         <button
           onClick={sendMessage}
-          className="ml-2 bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700"
+          className="ml-2      rounded  text-yellow-300"
         >
-          Send
+          <Send />
         </button>
       </div>
     )}
