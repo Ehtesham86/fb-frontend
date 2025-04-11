@@ -79,7 +79,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="hidden lg:block lg:w-64 xl:w-80 fixed right-0 top-16 bottom-0 overflow-y-auto p-4" style={{width:"inherit"}}>
+        <div className="hidden lg:block lg:w-64 xl:w-80 fixed right-0 top-16 bottom-0 overflow-y-auto p-4"  >
           <RightSideBar />
         </div>
       </main>
