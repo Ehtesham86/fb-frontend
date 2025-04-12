@@ -37,7 +37,8 @@ const RightSideBar = () => {
     const [loading,setLoading] = useState(false);
   console.log(user,'user_______1')
   console.log(userList,'user_______2')
-
+   const [showChatModal, setShowChatModal] = useState(false);
+  
     useEffect(() =>{
       const fetchUsers = async () => {
          try {
@@ -120,94 +121,125 @@ const RightSideBar = () => {
 </div>
 
 
-  <div className="mt-2 border-t border-[#c9aa71]/30"></div>
+  {/* <div className="mt-2 border-t border-[#c9aa71]/30"></div> */}
 </div>
 
-        <div className="flex h-screen overflow-y-auto">
+<div className="flex h-screen overflow-y-auto">
+
+<div className="flex h-screen justify-center items-start   bg-white">
   {/* Sidebar */}
-  <div className="w-1/2  border-r border-yellow-700 p-4 border-l-4 border-b-4"
-  
-   style={{ borderColor: '#d3c19a' }} >
-    <h2 className="text-xs tracking-widest text-yellow-700 font-semibold mb-3">
+  <div
+    className="w-full max-w-md p-6 border border-yellow-700 rounded-lg shadow-md"
+    style={{ borderColor: "#d3c19a" }}
+  >
+    <h2 className="text-sm tracking-widest text-yellow-700 font-semibold mb-4 text-center">
       CONNECTIONS
     </h2>
 
-    <ul className="space-y-3">
-  {userList.map((userItem) => (
-    <li
-      key={userItem._id}
-      className={`flex items-center space-x-3 p-2 rounded-md cursor-pointer transition-all ${
-        selectedUser?._id === userItem._id ? "bg-yellow-100" : "hover:bg-gray-100"
-      }`}
-      onClick={() => setSelectedUser(userItem)}
-    >
-      <img
-        src={
-          userItem.profilePicture ||
-          `https://ui-avatars.com/api/?name=${encodeURIComponent(userItem.username)}`
-        }
-        alt={userItem.username}
-        className="w-10 h-10 rounded-full border-2 border-gray-300"
-      />
-      <span className="text-sm font-medium text-gray-700 break-words">
-        {userItem.username}
-      </span>
-    </li>
-  ))}
-</ul>
-
+    <ul className="space-y-2 w-full">
+      {userList.map((userItem) => (
+        <li
+          key={userItem._id}
+          className={`flex items-center space-x-3 p-3 rounded-md cursor-pointer transition-all w-full ${
+            selectedUser?._id === userItem._id
+              ? "bg-yellow-100"
+              : "hover:bg-gray-100"
+          }`}
+          onClick={() => {
+            setSelectedUser(userItem);
+            setShowChatModal(true);
+          }}
+        >
+          <img
+            src={
+              userItem.profilePicture ||
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(userItem.username)}`
+            }
+            alt={userItem.username}
+            className="w-10 h-10 rounded-full border-2 border-gray-300"
+          />
+          <span className="text-sm font-medium text-gray-700 break-words">
+            {userItem.username}
+          </span>
+        </li>
+      ))}
+    </ul>
   </div>
+</div>
 
-  {/* Chat Section */}
-  <div className="w-3/4 p-4 flex flex-col">
-    <div className="flex-1 overflow-y-auto mb-4 bg-gray-100 p-4 rounded">
-      {selectedUser ? (
-        messages.length > 0 ? (
-          messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`mb-2 flex ${
-                msg.senderId === user._id ? "justify-end" : "justify-start"
+
+{/* Placeholder to occupy remaining space */}
+{/* <div className="w-2/3"></div> */}
+
+{/* Chat Modal */}
+{showChatModal && selectedUser && (
+  <div className="fixed bottom-10 right-24 w-full max-w-sm bg-white rounded-lg shadow-lg z-50 border border-gray-200 flex flex-col h-[70vh]">
+    <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gray-100 rounded-t-lg">
+      <div className="flex items-center space-x-2">
+        <img
+          src={
+            selectedUser.profilePicture ||
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedUser.username)}`
+          }
+          alt={selectedUser.username}
+          className="w-8 h-8 rounded-full"
+        />
+        <span className="text-sm font-semibold text-gray-700">{selectedUser.username}</span>
+      </div>
+      <button
+        onClick={() => setShowChatModal(false)}
+        className="text-gray-400 hover:text-gray-600"
+      >
+        ✕
+      </button>
+    </div>
+
+    {/* Chat Messages */}
+    <div className="flex-1 overflow-y-auto p-3 space-y-2 bg-gray-50">
+      {messages.length > 0 ? (
+        messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex ${
+              msg.senderId === user._id ? "justify-end" : "justify-start"
+            }`}
+          >
+            <span
+              className={`px-4 py-2 rounded-lg text-sm max-w-[75%] break-words ${
+                msg.senderId === user._id
+                  ? "bg-blue-500 text-white"
+                  : "bg-green-400 text-black"
               }`}
             >
-              <span
-                className={`inline-block px-4 py-2 rounded-lg max-w-xs break-words ${
-                  msg.senderId === user._id ? "bg-blue-500 text-white" : "bg-green-400 text-black"
-                }`}
-              >
-                {msg.text}
-              </span>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No messages yet.</p>
-        )
+              {msg.text}
+            </span>
+          </div>
+        ))
       ) : (
-        <p className="text-gray-500">Select a user to start chatting.</p>
+        <p className="text-gray-500 text-sm">No messages yet.</p>
       )}
     </div>
 
-    {/* Message input */}
-    {selectedUser && (
-      <div className="flex">
-        <input
-          type="text"
-          style={{width:"7rem"}}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="flex-1 p-2 border border-gray-300 rounded"
-          placeholder="Type your message..."
-        />
-        <button
-          onClick={sendMessage}
-          className="ml-2      rounded  text-yellow-300"
-        >
-          <Send />
-        </button>
-      </div>
-    )}
+    {/* Message Input */}
+    <div className="p-3 border-t border-gray-200 flex">
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        className="flex-1 p-2 border border-gray-300 rounded text-sm"
+        placeholder="Type your message..."
+      />
+      <button
+        onClick={sendMessage}
+        className="ml-2 px-4 py-2 bg-yellow-300 text-white rounded text-sm hover:bg-yellow-400"
+      >
+        <Send />
+      </button>
+    </div>
   </div>
+)}
 </div>
+
 
       {/* TRANSMISSIONS */}
       <div className="mt-6 border-t border-yellow-700 pt-3 pl-3 flex justify-center items-center space-x-2   font-semibold text-sm tracking-widest" style={{color:"#b79f68"}}>

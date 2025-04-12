@@ -188,7 +188,7 @@ const Header = () => {
 </div>
 <div className="flex justify-center items-center space-x-6 md:space-x-8">
   {[
-    { label: "GROUPS", path: "/groups", tab: "groups" },
+    { label: "GROUPS", path: "/Groupspage", tab: "groups" },
     { label: "PAGES", path: "/pages", tab: "pages" },
     { label: "MARKET", path: "/market", tab: "market" },
     { label: "SERVICES", path: "/services", tab: "services" },
