@@ -18,10 +18,11 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import userStore from "@/store/userStore";
 import { usePostStore } from "@/store/usePostStore";
+import Select from 'react-select';
 
 const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
-const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
+const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen,groups }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const { user } = userStore();
   const [postContent, setPostContent] = useState("");
@@ -31,6 +32,23 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
   const [loading, setLoading] = useState(false);
   const { handleCreatePost } = usePostStore();
   const [showImageUpload, setShowImageUpload] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+
+console.log(selectedGroup,'groups_________')
+console.log(user,'groups_________1')
+
+// Convert to options for react-select
+const options = groups?.map(group => ({
+  value: group._id,
+  label: group.name,
+  data: group // full group object for later use
+}));
+
+// On change
+const handleChange = (selectedOption) => {
+  console.log('Selected group:', selectedOption.data); // full group object
+  setSelectedGroup(selectedOption.data);
+};
 
   const fileInputRef= useRef(null)
 
@@ -54,6 +72,12 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
       setLoading(true);
       const formData = new FormData();
       formData.append("content", postContent);
+      formData.append("groupId", selectedGroup._id);
+      formData.append("groupName", selectedGroup.name);
+      // formData.append("groupId", selectedGroup._id);
+
+
+
       if (selectedFile) {
         formData.append("media", selectedFile);
       }
@@ -117,6 +141,16 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
             <DialogContent className="sm:max-w-[525px] max-h-[80vh] overflow-y-auto bg-white dark:bg-[#1f1f1f] rounded-lg shadow-md">
             <DialogHeader>
                 <DialogTitle className="text-center">Create Post</DialogTitle>
+          {
+            groups?
+              <div className="w-full max-w-md mx-auto mt-4">
+      <Select
+        options={options}
+        onChange={handleChange}
+        placeholder="Select a group"
+        isSearchable
+      />
+    </div> :""} 
               </DialogHeader>
               <Separator />
               <div className="flex items-center space-x-3 py-4">

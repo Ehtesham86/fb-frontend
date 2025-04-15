@@ -1,18 +1,24 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import LeftSideBar from "../components/LeftSideBar";
-import RightSideBar from "../components/RightSideBar";
+ import RightSideBar from "../components/RightSideBar";
 import StorySection from "@/app/story/StorySection";
 import NewPostForm from "../posts/NewPostForm";
 import PostCard from "../posts/PostCard";
 import { usePostStore } from "@/store/usePostStore";
 import toast from "react-hot-toast";
 import { Send } from 'lucide-react';
+import LeftSideBar from "./CreateGroupPage ";
+import CreateGroupPage from "./CreateGroupPage ";
 
 const Groupspage = () => {
   const [isPostFormOpen, setIsPostFormOpen] = useState(false);
   const [likePosts,setLikePosts] = useState(new Set());
   const {posts,fetchPost,handleLikePost,handleCommentPost,handleSharePost} = usePostStore();
+  const [groups, setGroups] = useState([]);
+
+console.log(groups,'groups_________1')
+console.log(posts,'groups_________1posts')
+
 
   useEffect(() =>{
     fetchPost()
@@ -51,12 +57,12 @@ const Groupspage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <main className="flex flex-1 pt-16">
-        <LeftSideBar />
+        <CreateGroupPage getgroups={setGroups} />
         <div className="flex-1 px-4 py-6 md:ml-80 lg:mr-80 lg:max-w-3xl xl:max-w-4xl mx-auto" style={{marginLeft:'13rem'}}>
         <div className="lg:ml-2 xl:ml-28" style={{width:'68%',marginRight:'-3rem'}}>
             {/* <StorySection /> */}
             <NewPostForm
-            
+            groups={groups}
               isPostFormOpen={isPostFormOpen}
               setIsPostFormOpen={setIsPostFormOpen}
             />
