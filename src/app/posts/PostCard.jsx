@@ -87,7 +87,15 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
               </Avatar>
               <div>
                 <p className="font-semibold dark:text-white">
-                  {post?.user?.username}
+                <span className="text-gray-800 font-semibold">{post?.user?.username}</span>
+{post?.groupName && (
+  <>
+    <span className="text-gray-500 mx-1">posted in</span>
+    <span className="text-gray-800 font-medium">{post.groupName}</span>
+  </>
+)}
+
+
                 </p>
                 <p className="font-sm text-gray-500">
                   {formateDate(post?.createdAt)}
