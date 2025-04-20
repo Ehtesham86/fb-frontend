@@ -189,13 +189,13 @@ const Header = () => {
 <div className="flex justify-center items-center space-x-6 md:space-x-8">
   {[
     { label: "GROUPS", path: "/Groupspage", tab: "groups" },
-    { label: "PAGES", path: "/pages", tab: "pages" },
-    { label: "MARKET", path: "/market", tab: "market" },
-    { label: "SERVICES", path: "/services", tab: "services" },
-    { label: "MEDIA", path: "/media", tab: "media" },
-    { label: "BRIEF", path: "/brief", tab: "brief" },
-    { label: "GATHER", path: "/gather", tab: "gather" },
-    { label: "UPDATES", path: "/updates", tab: "updates" },
+    { label: "PAGES", path: "/Pages", tab: "pages" },
+    { label: "MARKET", path: "/MarketPlace", tab: "market" },
+    { label: "SERVICES", path: "/Services", tab: "services" },
+    { label: "MEDIA", path: "/Media", tab: "media" },
+    // { label: "BRIEF", path: "/brief", tab: "brief" },
+    // { label: "GATHER", path: "/gather", tab: "gather" },
+    { label: "UPDATES", path: "/Updates", tab: "updates" },
   ].map(({ label, path, tab }) => (
     <button
       key={tab}

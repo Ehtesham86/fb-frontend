@@ -6,7 +6,7 @@ import { ExternalLink, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import userStore from "@/store/userStore";
-import { getAllUsers } from "@/service/user.service";
+import { getAllUsers ,getAllUsers1} from "@/service/user.service";
 import Image from 'next/image';
 import { Send } from 'lucide-react';
 
@@ -33,10 +33,12 @@ const RightSideBar = () => {
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState('');
      const [userList,setUserList] = useState([])
+     const [userList1,setUserList1] = useState([])
+
   const { user, clearUser } = userStore();
     const [loading,setLoading] = useState(false);
-  console.log(user,'user_______1')
-  console.log(userList,'user_______2')
+  console.log(userList1,'user_______1__')
+  console.log(userList,'user_______12')
    const [showChatModal, setShowChatModal] = useState(false);
   
     useEffect(() =>{
@@ -45,6 +47,20 @@ const RightSideBar = () => {
            setLoading(true);
            const result = await getAllUsers()
            setUserList(result);
+         } catch (error) {
+           console.log(error);
+         }finally{
+          setLoading(false);
+         }
+      }
+      fetchUsers();
+    },[])
+    useEffect(() =>{
+      const fetchUsers = async () => {
+         try {
+           setLoading(true);
+           const result = await getAllUsers1()
+           setUserList1(result);
          } catch (error) {
            console.log(error);
          }finally{

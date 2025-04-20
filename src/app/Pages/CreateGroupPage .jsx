@@ -8,14 +8,11 @@ const CreateGroupPage = (props) => {
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
   const [groups, setGroups] = useState([]);
-  
-  // const currentUser=localStorage.getItem('user-storage')
   console.log(groups,'groups_________3')
-    
+   
   const currentUser = JSON.parse(localStorage.getItem('user-storage'));
   const staticUserId = currentUser?.state?.user?._id;
   console.log(staticUserId, 'groups_________39');
-  
   // const staticUserId = '6686f5dc61546b507649caf2';
   const token = localStorage.getItem("token");
 
@@ -26,7 +23,7 @@ const CreateGroupPage = (props) => {
   const fetchGroups = async () => {
     try {
       const response = await axios.get(
-        `https://fb-backend.vercel.app/groupRoute/groups?userId=${staticUserId}`,
+        `https://fb-backend.vercel.app/PagesRoute/Pages?userId=${staticUserId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,9 +40,9 @@ const CreateGroupPage = (props) => {
   const handleCreateGroup = async () => {
     try {
       await axios.post(
-        `https://fb-backend.vercel.app/groupRoute/group?userId=${staticUserId}`,
+        `https://fb-backend.vercel.app/PagesRoute/Pages?userId=${staticUserId}`,
         {
-          name: groupName,
+          pageName: groupName,
           userId: staticUserId,
           description,
         },
@@ -71,7 +68,7 @@ const CreateGroupPage = (props) => {
   const handleJoinGroup = async (groupId) => {
     try {
       const response = await axios.post(
-        `https://fb-backend.vercel.app/groupRoute/group/join/${groupId}`,
+        `https://fb-backend.vercel.app/PagesRoute/Pages/join/${groupId}`,
         { userId: staticUserId },
         {
           headers: {
@@ -90,13 +87,13 @@ const CreateGroupPage = (props) => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-10" style={{ marginTop: '3rem' }}>
-      <h1 className="text-3xl font-bold mb-6">Create a New Group</h1>
+      <h1 className="text-3xl font-bold mb-6">Create a New Page</h1>
 
       <button
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         onClick={() => setShowModal(true)}
       >
-        + Create Group
+        + Create Page
       </button>
 
       {message && (
@@ -105,11 +102,10 @@ const CreateGroupPage = (props) => {
         </div>
       )}
 
-      {/* Group List */}
-    
+          
 {groups.length > 0 && (
   <div className="mt-10">
-    <h2 className="text-2xl font-semibold mb-4">Available Groups</h2>
+    <h2 className="text-2xl font-semibold mb-4">Available Pages</h2>
     <div className="flex flex-col gap-4">
       {groups.map((group) => {
         const isJoined =
@@ -121,21 +117,21 @@ const CreateGroupPage = (props) => {
             key={group._id}
             className="bg-white p-4 rounded-lg shadow flex justify-between items-center"
           >
-            <span className="font-medium text-lg">{group.name}</span>
+            <span className="font-medium text-lg">{group.pageName}</span>
 
             {isJoined ? (
               <button
                 className="bg-gray-400 text-white px-4 py-1 rounded cursor-not-allowed"
                 disabled
               >
-                ✅ Joined
+                ✅ Liked
               </button>
             ) : (
               <button
                 className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700"
                 onClick={() => handleJoinGroup(group._id)}
               >
-                Join
+                Like
               </button>
             )}
           </div>
@@ -144,7 +140,6 @@ const CreateGroupPage = (props) => {
     </div>
   </div>
 )}
-
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
@@ -152,13 +147,13 @@ const CreateGroupPage = (props) => {
             <h2 className="text-xl font-semibold mb-4">New Group</h2>
 
             <div className="mb-4">
-              <label className="block font-medium text-gray-700">Group Name</label>
+              <label className="block font-medium text-gray-700">Page Name</label>
               <input
                 type="text"
                 value={groupName}
                 onChange={(e) => setGroupName(e.target.value)}
                 className="w-full border px-3 py-2 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter group name"
+                placeholder="Enter Page name"
               />
             </div>
 

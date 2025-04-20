@@ -119,7 +119,15 @@ export const getAllUsers = async() =>{
         throw error;   
     }
 }
-
+export const getAllUsers1 = async() =>{
+    try {
+         const response = await axiosInstance.get('/users')
+         return response?.data;
+    } catch (error) {
+        console.log(error);
+        throw error;   
+    }
+}
 
 
 

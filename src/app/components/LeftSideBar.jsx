@@ -111,8 +111,8 @@ const LeftSideBar = () => {
           className="w-full h-full object-cover" 
         />
       </div>
-      <span className="font-semibold mt-2">{user.lastName}</span>
-      <span className="font-semibold mt-1">{user.firstName}</span>
+      <span className="font-semibold mt-2">{user?.lastName}</span>
+      <span className="font-semibold mt-1">{user?.firstName}</span>
     </div>
     <div className="p-6 bg-[#e0f7fa] rounded-lg text-center">
       <p className="text-gray-800 mb-4">
