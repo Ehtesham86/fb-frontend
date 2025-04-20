@@ -51,7 +51,7 @@ const ServicesDetails = () => {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/ReviewRoute/reviews/product/${posts[0]?._id}`
+          `https://fb-backend.vercel.app/ReviewRoute/reviews/product/${posts[0]?._id}`
         );
         if (res.data?.status === 'success') {
           setReviews(res.data.data);
@@ -80,7 +80,7 @@ const ServicesDetails = () => {
       };
   
       try {
-        const response = await fetch('http://localhost:8080/ReviewRoute/reviews', {
+        const response = await fetch('https://fb-backend.vercel.app/ReviewRoute/reviews', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ const ServicesDetails = () => {
   useEffect(() => {
      const fetchListings = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/Services/Services/${IdProduct}`);
+        const response = await fetch(`https://fb-backend.vercel.app/Services/Services/${IdProduct}`);
         const data = await response.json();
         console.log('Fetched data:', data);
         if (data.status === 'success') {

@@ -83,7 +83,7 @@ console.log(message1,'Message from child:___')
   const fetchGroups = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/PagesRoute/Pages?userId=${staticUserId}`,
+        `https://fb-backend.vercel.app/PagesRoute/Pages?userId=${staticUserId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -106,7 +106,7 @@ console.log(message1,'Message from child:___')
     
     try {
       await axios.post(
-        `http://localhost:8080/MarketPlace/marketplace`,
+        `https://fb-backend.vercel.app/MarketPlace/marketplace`,
         {sellerName:sellerName,
           title,
           sellerId: staticUserId,
@@ -144,7 +144,7 @@ props.getRefresh(true)
   const handleJoinGroup = async (groupId) => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/PagesRoute/Pages/join/${groupId}`,
+        `https://fb-backend.vercel.app/PagesRoute/Pages/join/${groupId}`,
         { userId: staticUserId },
         {
           headers: {

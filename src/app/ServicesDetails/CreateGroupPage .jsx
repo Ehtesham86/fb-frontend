@@ -108,7 +108,7 @@ console.log(PaymentDone,'PaymentDone_________1')
   const fetchGroups = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/Services/Services?userId=${staticUserId}`,
+        `https://fb-backend.vercel.app/Services/Services?userId=${staticUserId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -133,7 +133,7 @@ console.log(PaymentDone,'PaymentDone_________1')
     
     try {
       await axios.post(
-        `http://localhost:8080/Services/Services`,
+        `https://fb-backend.vercel.app/Services/Services`,
         {sellerName:sellerName,
           title,
           sellerId: staticUserId,
@@ -175,7 +175,7 @@ props.getRefresh(true)
   const handleJoinGroup = async (groupId) => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/Services/Services/join/${groupId}`,
+        `https://fb-backend.vercel.app/Services/Services/join/${groupId}`,
         { userId: staticUserId },
         {
           headers: {

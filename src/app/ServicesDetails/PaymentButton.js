@@ -22,7 +22,7 @@ export default function PaymentForm({ amount = 50 ,getMessage }) {
     if (!stripe || !elements) return;
 
     try {
-      const res = await fetch('http://localhost:8080/MarketPlace/create-checkout-session', {
+      const res = await fetch('https://fb-backend.vercel.app/MarketPlace/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount }),

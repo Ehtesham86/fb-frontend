@@ -22,7 +22,7 @@ const Services = () => {
   useEffect(() => {
      const fetchListings = async () => {
       try {
-        const response = await fetch('http://localhost:8080/Services/Services');
+        const response = await fetch('https://fb-backend.vercel.app/Services/Services');
         const data = await response.json();
         console.log('Fetched data:', data);
         if (data.status === 'success') {
