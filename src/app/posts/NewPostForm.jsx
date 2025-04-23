@@ -40,7 +40,7 @@ console.log(user,'groups_________1')
 // Convert to options for react-select
 const options = groups?.map(group => ({
   value: group._id,
-  label: group.name,
+  label: group.pageName,
   data: group // full group object for later use
 }));
 

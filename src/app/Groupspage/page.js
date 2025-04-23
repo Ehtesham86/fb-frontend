@@ -55,42 +55,49 @@ console.log(posts,'groups_________1posts')
 
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <main className="flex flex-1 pt-16">
+    <div className="min-h-screen bg-background text-foreground pt-16">
+    <main className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,3fr)_1fr]">
+      {/* Left Sidebar (Visible on lg+) */}
+      <div className="hidden lg:block   p-4">
         <CreateGroupPage getgroups={setGroups} />
-        <div className="flex-1 px-4 py-6 md:ml-80 lg:mr-80 lg:max-w-3xl xl:max-w-4xl mx-auto" style={{marginLeft:'13rem'}}>
-        <div className="lg:ml-2 xl:ml-28" style={{width:'68%',marginRight:'-3rem'}}>
-            {/* <StorySection /> */}
-            <NewPostForm
+      </div>
+  
+      {/* Center Content */}
+      <div className="w-full px-4 py-6">
+        <div className="w-full max-w-3xl mx-auto">
+          <NewPostForm
             groups={groups}
-              isPostFormOpen={isPostFormOpen}
-              setIsPostFormOpen={setIsPostFormOpen}
-            />
-            <div className="mt-6 space-y-6 mb-4">
-              {posts.map((post) => (
-                <PostCard key={post._id} 
-                  post={post}
-                  isLiked = {likePosts.has(post?._id)}
-                  onLike={() => handleLike(post?._id)}
-                  onComment={async(comment) => {
-                    await handleCommentPost(post?._id,comment.text);
-                    await fetchPost();
-                  }}
-                  onShare = {async() =>{
-                  await handleSharePost(post?._id)
+            isPostFormOpen={isPostFormOpen}
+            setIsPostFormOpen={setIsPostFormOpen}
+          />
+          <div className="mt-6 space-y-6 mb-4">
+            {posts.map((post) => (
+              <PostCard
+                key={post._id}
+                post={post}
+                isLiked={likePosts.has(post?._id)}
+                onLike={() => handleLike(post?._id)}
+                onComment={async (comment) => {
+                  await handleCommentPost(post?._id, comment.text);
                   await fetchPost();
-                  }}
-                />
-              ))}
-            </div>
+                }}
+                onShare={async () => {
+                  await handleSharePost(post?._id);
+                  await fetchPost();
+                }}
+              />
+            ))}
           </div>
         </div>
-
-        <div className="hidden lg:block lg:w-64 xl:w-80 fixed right-0 top-16 bottom-0 overflow-y-auto p-4" style={{width:"31%"}}  >
-          <RightSideBar />
-        </div>
-      </main>
-    </div>
+      </div>
+  
+      {/* Right Sidebar (Visible on lg+) */}
+      <div className="hidden lg:block   p-4">
+        <RightSideBar />
+      </div>
+    </main>
+  </div>
+  
   );
 };
 
