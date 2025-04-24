@@ -138,7 +138,9 @@ const handleChange = (selectedOption) => {
                 </Button>
               </div>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[525px] max-h-[80vh] overflow-y-auto bg-white dark:bg-[#1f1f1f] rounded-lg shadow-md">
+            <DialogContent 
+  className="sm:max-w-[525px] max-h-[80vh] overflow-y-auto bg-white dark:bg-white rounded-lg shadow-md"
+>
             <DialogHeader>
                 <DialogTitle className="text-center">Create Post</DialogTitle>
           {

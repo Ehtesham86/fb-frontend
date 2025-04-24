@@ -59,25 +59,22 @@ console.log(posts,'groups_________1posts')
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
     {/* Heading */}
-    <h1 className="text-3xl font-bold mt-24 ml-6">New Friend Request</h1>
+    <h1 className="text-3xl font-bold mt-24 ml-6 sm:ml-4">New Friend Request</h1>
   
-    <main className="flex flex-1 gap-6 px-4">
+    <main className="flex flex-1 flex-col lg:flex-row gap-6 px-4 lg:px-8">
       {/* Left side: FriendRequest and FriendsSuggestion */}
-      <div className="hidden md:flex flex-col gap-6 mt-6" style={{ width: "13rem" }}>
+      <aside className="hidden md:flex flex-col gap-6 mt-6 w-full max-w-xs">
         <FriendRequest />
   
         <div>
           <h2 className="text-xl font-semibold mb-2">Friend Suggestions</h2>
           <FriendsSuggestion />
         </div>
-      </div>
+      </aside>
   
       {/* Center content: NewPostForm and Post List */}
-      <div
-        className="flex-1 px-4 py-6 md:ml-80 lg:mr-80 lg:max-w-3xl xl:max-w-4xl mx-auto"
-        style={{ marginLeft: "13rem" }}
-      >
-        <div className="lg:ml-2 xl:ml-28" style={{ width: "68%", marginRight: "-3rem" }}>
+      <section className="w-full lg:flex-1 mt-6">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4">
           <NewPostForm
             groups={groups}
             isPostFormOpen={isPostFormOpen}
@@ -102,17 +99,15 @@ console.log(posts,'groups_________1posts')
             ))}
           </div>
         </div>
-      </div>
+      </section>
   
       {/* Right sidebar */}
-      <div
-        className="hidden lg:block lg:w-64 xl:w-80 fixed right-0 top-16 bottom-0 overflow-y-auto p-4"
-        style={{ width: "31%" }}
-      >
+      <aside className="hidden lg:block w-full max-w-sm xl:max-w-md mt-6 lg:mt-0 lg:sticky lg:top-20">
         <RightSideBar />
-      </div>
+      </aside>
     </main>
   </div>
+  
   
   );
 };

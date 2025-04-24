@@ -152,41 +152,33 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
             >
               <MessageCircle className="mr-2 h-4 w-4" /> Comment
             </Button>
-            <Dialog
-              open={isShareDialogOpen}
-              onOpenChange={setIsShareDialogOpen}
-            >
-              <DialogTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex-1 dark:hover:bg-gray-500"
-                onClick={onShare}
-                >
-                  <Share2 className="mr-2 h-4 w-4" />
-                  share
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Share This Post</DialogTitle>
-                  <DialogDescription>
-                    Choose how you want to share this post
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="flex flex-col space-y-4 ">
-                  <Button onClick={() => handleShare("facebook")}>
-                    Share on Svryn Social
-                  </Button>
-                  <Button onClick={() => handleShare("twitter")}>
-                    Share on Twitter
-                  </Button>
-                  <Button onClick={() => handleShare("linkedin")}>
-                    Share on Linkedin
-                  </Button>
-                  <Button onClick={() => handleShare("copy")}>Copy Link</Button>
-                </div>
-              </DialogContent>
-            </Dialog>
+            <Dialog open={isShareDialogOpen} onOpenChange={setIsShareDialogOpen}>
+  <DialogTrigger asChild>
+    <Button
+      variant="ghost"
+      className="flex-1 dark:hover:bg-gray-500"
+    >
+      <Share2 className="mr-2 h-4 w-4" />
+      Share
+    </Button>
+  </DialogTrigger>
+  <DialogContent className="bg-white p-6  rounded z-[9999] max-w-md w-full mx-auto">
+  <DialogHeader>
+    <DialogTitle>Share This Post</DialogTitle>
+    <DialogDescription>
+      Choose how you want to share this post.
+    </DialogDescription>
+  </DialogHeader>
+
+  <div className="flex flex-col space-y-4 mt-4">
+    <Button onClick={() => handleShare("facebook")}>Share on Svryn Social</Button>
+    <Button onClick={() => handleShare("twitter")}>Share on Twitter</Button>
+    <Button onClick={() => handleShare("linkedin")}>Share on Linkedin</Button>
+    <Button onClick={() => handleShare("copy")}>Copy Link</Button>
+  </div>
+</DialogContent>
+
+</Dialog>
           </div>
           <Separator className="mb-2 dark:bg-gray-400" />
           <AnimatePresence>
