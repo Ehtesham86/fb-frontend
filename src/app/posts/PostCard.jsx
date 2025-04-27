@@ -172,9 +172,7 @@ const PostCard = ({ post, isLiked, onShare, onComment, onLike }) => {
 
   <div className="flex flex-col space-y-4 mt-4">
     <Button onClick={() => handleShare("facebook")}>Share on Svryn Social</Button>
-    <Button onClick={() => handleShare("twitter")}>Share on Twitter</Button>
-    <Button onClick={() => handleShare("linkedin")}>Share on Linkedin</Button>
-    <Button onClick={() => handleShare("copy")}>Copy Link</Button>
+     <Button onClick={() => handleShare("copy")}>Copy Link</Button>
   </div>
 </DialogContent>
 

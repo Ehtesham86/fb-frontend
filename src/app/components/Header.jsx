@@ -1,7 +1,8 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
- 
+import { useInputStore } from "@/store/useInputStore";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,7 +52,11 @@ const Header = () => {
     ?.split(" ")
     .map((name) => name[0])
     .join("");
+    const { setInputValue } = useInputStore();
 
+    const handleChange = (e) => {
+      setInputValue(e.target.value); // save input value in Zustand store
+    };
   const handleNavigation = (path, item) => {
     router.push(path);
     setActiveTab(item)
@@ -221,6 +226,8 @@ const Header = () => {
           </div>
           <input
             type="text"
+            onChange={handleChange}
+
             className="px-3 py-2 w-full focus:outline-none bg-[#dcdbcf]"
           />
         </div>
