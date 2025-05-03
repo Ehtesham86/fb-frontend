@@ -67,11 +67,15 @@ console.log(posts,'groups_________1posts')
         <div className="w-full max-w-3xl mx-auto">
           <NewPostForm
             groups={groups}
+            pages={'groups'}
+
             isPostFormOpen={isPostFormOpen}
             setIsPostFormOpen={setIsPostFormOpen}
           />
           <div className="mt-6 space-y-6 mb-4">
-            {posts.map((post) => (
+            {posts
+  .filter(post => post.pages==='groups') // filters out posts where group is null, empty string, or undefined
+  .map((post) => (
               <PostCard
                 key={post._id}
                 post={post}

@@ -75,7 +75,7 @@ console.log(posts,'groups_________1posts')
           />
           <div className="mt-6 space-y-6 mb-4">
           {posts
-  .filter(post => post.group==null) // filters out posts where group is null, empty string, or undefined
+  .filter(post => post.pages==='pages') // filters out posts where group is null, empty string, or undefined
   .map((post) => (
     <PostCard
       key={post._id}
