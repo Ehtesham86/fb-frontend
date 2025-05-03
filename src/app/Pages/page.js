@@ -68,26 +68,31 @@ console.log(posts,'groups_________1posts')
         <div className="w-full max-w-4xl mx-auto">
           <NewPostForm
             groups={groups}
+            pages={'pages'}
+
             isPostFormOpen={isPostFormOpen}
             setIsPostFormOpen={setIsPostFormOpen}
           />
           <div className="mt-6 space-y-6 mb-4">
-            {posts.map((post) => (
-              <PostCard
-                key={post._id}
-                post={post}
-                isLiked={likePosts.has(post?._id)}
-                onLike={() => handleLike(post?._id)}
-                onComment={async (comment) => {
-                  await handleCommentPost(post?._id, comment.text);
-                  await fetchPost();
-                }}
-                onShare={async () => {
-                  await handleSharePost(post?._id);
-                  await fetchPost();
-                }}
-              />
-            ))}
+          {posts
+  .filter(post => post.group==null) // filters out posts where group is null, empty string, or undefined
+  .map((post) => (
+    <PostCard
+      key={post._id}
+      post={post}
+      isLiked={likePosts.has(post?._id)}
+      onLike={() => handleLike(post?._id)}
+      onComment={async (comment) => {
+        await handleCommentPost(post?._id, comment.text);
+        await fetchPost();
+      }}
+      onShare={async () => {
+        await handleSharePost(post?._id);
+        await fetchPost();
+      }}
+    />
+))}
+
           </div>
         </div>
       </div>

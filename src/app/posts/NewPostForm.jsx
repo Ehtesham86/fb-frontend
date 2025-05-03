@@ -22,7 +22,7 @@ import Select from 'react-select';
 
 const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
-const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen,groups }) => {
+const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen,groups,pages }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const { user } = userStore();
   const [postContent, setPostContent] = useState("");
@@ -35,12 +35,13 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen,groups }) => {
   const [selectedGroup, setSelectedGroup] = useState(null);
 
 console.log(selectedGroup,'groups_________')
-console.log(user,'groups_________1')
+console.log(groups,'groups_________1')
 
 // Convert to options for react-select
 const options = groups?.map(group => ({
   value: group._id,
-  label: group.pageName,
+  
+  label:groups?group.name: group.pageName,
   data: group // full group object for later use
 }));
 
@@ -74,6 +75,8 @@ const handleChange = (selectedOption) => {
       formData.append("content", postContent);
       formData.append("groupId", selectedGroup._id);
       formData.append("groupName", selectedGroup.name);
+      formData.append("pages", pages);
+
       // formData.append("groupId", selectedGroup._id);
 
 

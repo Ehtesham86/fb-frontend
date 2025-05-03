@@ -144,7 +144,7 @@ const CreateGroupPage = (props) => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">New Group</h2>
+            <h2 className="text-xl font-semibold mb-4">New Page</h2>
 
             <div className="mb-4">
               <label className="block font-medium text-gray-700">Page Name</label>
