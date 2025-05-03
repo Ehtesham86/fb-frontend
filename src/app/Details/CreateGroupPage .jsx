@@ -110,6 +110,8 @@ console.log(message1,'Message from child:___')
         {sellerName:sellerName,
           title,
           sellerId: staticUserId,
+          isFeatured: isFeatured?'isFeatured':'',
+
           description,
           category: selectedOptions,
           PhoneNumber:PhoneNumber,

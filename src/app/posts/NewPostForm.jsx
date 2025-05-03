@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import React, { useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import PaymentButton from './PaymentButton';
+
 import {
   Dialog,
   DialogContent,
@@ -19,6 +21,7 @@ import dynamic from "next/dynamic";
 import userStore from "@/store/userStore";
 import { usePostStore } from "@/store/usePostStore";
 import Select from 'react-select';
+import StripeWrapper from "../Details/StripeWrapper";
 
 const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
@@ -26,6 +29,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen,groups,pages }) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const { user } = userStore();
   const [postContent, setPostContent] = useState("");
+  
   const [filePreview, setFilePreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileType, setFileType] = useState("");
@@ -33,6 +37,8 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen,groups,pages }) => {
   const { handleCreatePost } = usePostStore();
   const [showImageUpload, setShowImageUpload] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState(null);
+const [isFeatured, setIsFeatured] = useState(null); // true or false
+const [message1, setMessage1] = useState('');
 
 console.log(selectedGroup,'groups_________')
 console.log(groups,'groups_________1')
@@ -70,12 +76,22 @@ const handleChange = (selectedOption) => {
 
   const handlePost = async () => {
     try {
+      if (isFeatured) {
+        if (message1 !== '✅ Payment Successful!') {
+          setErrMsg("Please make payment");
+          return;
+        }
+      }
+      
       setLoading(true);
+      
       const formData = new FormData();
       formData.append("content", postContent);
       formData.append("groupId", selectedGroup._id);
       formData.append("groupName", selectedGroup.name);
       formData.append("pages", pages);
+      formData.append("isFeatured", isFeatured?'isFeatured':'');
+
 
       // formData.append("groupId", selectedGroup._id);
 
@@ -173,6 +189,45 @@ const handleChange = (selectedOption) => {
                   <p className="font-semibold">{user?.username}</p>
                 </div>
               </div>
+              <div className="mb-4">
+  <label className="block font-medium text-gray-700">Feature Listing</label>
+  <div className="flex gap-4 mt-2">
+    <label className="flex items-center space-x-2">
+      <input
+        type="checkbox"
+        checked={isFeatured === true}
+        onChange={() => {
+          setIsFeatured(true);
+          console.log("Featured: true");
+        }}
+      />
+      <span>Featured</span>
+    </label>
+    <label className="flex items-center space-x-2">
+      <input
+        type="checkbox"
+        checked={isFeatured === false}
+        onChange={() => {
+          setIsFeatured(false);
+          console.log("Featured: false");
+        }}
+      />
+      <span>Not Featured</span>
+    </label>
+  </div>
+  {/* Conditionally show text if featured is true */}
+  {isFeatured === true && <p className="mt-2 text-green-600">
+    {/* <PaymentButton/> */}
+    {/* <div className="min-h-screen flex items-center justify-center bg-gray-100"> */}
+      <StripeWrapper>
+        <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
+          <h1 className="text-xl font-bold mb-4">Pay with Card</h1>
+          <PaymentButton amount={5000} getMessage={setMessage1} /> {/* 5000 = $50 */}
+        </div>
+      </StripeWrapper>
+    {/* </div> */}
+    </p>}
+</div>
               <Textarea
                 placeholder={`what's on your mind? ${user?.username}`}
                 className="min-h-[100px] text-lg"
